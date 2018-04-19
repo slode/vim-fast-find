@@ -117,4 +117,15 @@ nmap <silent> <leader>l :call ToggleLoc()<CR>
 " search for word under cursor
 nnoremap <F2> :call FFind("", expand("<cword>"))<CR>
 nnoremap <F3> :call FFind(expand("<cword>"))<CR>
+
+
+function! SwitchSourceHeader()
+  let l:bn = expand("%:t:r")
+  if (expand ("%:e") == "cpp")
+    call FFind([l:bn.".h", l:bn.".hpp"])
+  else
+    call FFind([l:bn.".cpp", l:bn.".cc", l:bn.".c"])
+  endif
+endfunction
+
 nnoremap <F4> :call SwitchSourceHeader()<CR>
