@@ -1,6 +1,6 @@
 let g:ffind_excl_files = ['*.swp', '*~', '*.pyc', '*.so', '*.gif', '*.png']
 let g:ffind_incl_files = ['*.c', '*.hh', 'scons*', '*.py', '*.cpp', '*.h', '*.hpp', '*.php','*.js','*.css','*.html','*.scss', '*cmake']
-let g:ffind_excl_path = ['./.git', './build']
+let g:ffind_excl_path = ['*/.git/*', '*/build/*']
 let g:ffind_path = '.'
 
 function! FFind(...)
@@ -82,7 +82,7 @@ endfunction
 
 
 function! RunFFindPattern(...)
-  let l:pat = input("Search for pattern: ")
+  let l:pat = input("Search for pattern\: ")
 
   if(empty(l:pat)) | return | endif 
   
@@ -90,7 +90,7 @@ function! RunFFindPattern(...)
 endfunction
 
 function! RunFFindFile(...)
-  let l:pat = input("Search for file: ")
+  let l:pat = input("Search for file\: ")
 
   if(empty(l:pat)) | return | endif 
   
