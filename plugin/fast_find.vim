@@ -1,6 +1,6 @@
-let g:ffind_excl_files = ['*.swp', '*~', '*.pyc', '*.so', '*.gif', '*.png']
+let g:ffind_excl_files = ['*.swp', '*~', '*.pyc', '*.so', '*.gif', '*.png', 'tags']
 let g:ffind_incl_files = ['*.c', '*.hh', 'scons*', '*.py', '*.cpp', '*.h', '*.hpp', '*.php','*.js','*.css','*.html','*.scss', '*cmake']
-let g:ffind_excl_path = ['*/.git/*', '*/build/*']
+let g:ffind_excl_path = ['*/.git/*', '*/build/*', "tags"]
 let g:ffind_path = '.'
 
 function! FFind(...)
