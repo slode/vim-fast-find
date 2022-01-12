@@ -1,6 +1,6 @@
 let g:ffind_excl_files = ['*.swp', '*~', '*.pyc', '*.so', '*.gif', '*.png', 'tags']
 let g:ffind_incl_files = ['*.c', '*.hh', 'scons*', '*.py', '*.cpp', '*.h', '*.hpp', '*.php','*.js','*.css','*.html','*.scss', '*cmake']
-let g:ffind_excl_path = ['*/.git/*', '*/build/*', "tags"]
+let g:ffind_excl_path = ['*/.git/*', '*/build/*', "tags", "*/.mypy_cache" ]
 let g:ffind_path = '.'
 
 function! FFind(...)
@@ -38,7 +38,7 @@ function! FFind(...)
 
     let l:find_cmd = " find . " . l:expaths . " " . l:exfiles . " " . l:path_pattern . " -print "
     let l:xargs_cmd = executable("parallel") ? " parallel -j150% -n 1000 --gnu " : " xargs "  
-    let l:grep_cmd = exists('l:string_pattern') ? " | " . l:xargs_cmd . " grep -inHn -d skip -D skip -I -m1 " . l:string_pattern . " \"{}\" " : ""
+    let l:grep_cmd = exists('l:string_pattern') ? " | " . l:xargs_cmd . " grep -inHn -d skip -D skip -I -m1 '" . escape(l:string_pattern, ' ') . "' \"{}\" " : ""
     let l:sort_cmd = " | sort " 
 
     let l:tmpfile=tempname()
@@ -46,7 +46,7 @@ function! FFind(...)
     
     let l:cmd = l:find_cmd . l:grep_cmd . l:sort_cmd . l:redirect
 
-    echohl WarningMsg | echomsg "..." | echohl None | redraw
+    echohl WarningMsg | echomsg l:cmd . "..." | echohl None | redraw
 
     if exists('l:string_pattern')
       echohl WarningMsg | echomsg "Searching for pattern " .  l:string_pattern . "" | echohl None | redraw
@@ -82,7 +82,7 @@ endfunction
 
 
 function! RunFFindPattern(...)
-  let l:pat = input("Search for pattern\: ")
+  let l:pat = input("Search for pattern\:")
 
   if(empty(l:pat)) | return | endif 
   
@@ -90,7 +90,7 @@ function! RunFFindPattern(...)
 endfunction
 
 function! RunFFindFile(...)
-  let l:pat = input("Search for file\: ")
+  let l:pat = input("Search for file\:")
 
   if(empty(l:pat)) | return | endif 
   
