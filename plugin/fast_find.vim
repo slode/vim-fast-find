@@ -1,6 +1,6 @@
 let g:ffind_excl_files = ['*.swp', '*~', '*.pyc', '*.so', '*.gif', '*.png', 'tags']
-let g:ffind_incl_files = ['*.c', '*.hh', 'scons*', '*.py', '*.cpp', '*.h', '*.hpp', '*.php','*.js','*.css','*.html','*.scss', '*cmake']
-let g:ffind_excl_path = ['*/.git/*', '*/build/*', "tags", "*/.mypy_cache" ]
+let g:ffind_incl_files = ['*.c', '*.hh', 'scons*', '*.py', '*.cpp', '*.h', '*.hpp', '*.php','*.js','*.css','*.html','*.scss', '*cmake', '*.yml']
+let g:ffind_excl_path = ['*/.git/*', '*/build/*', "tags", "*/.mypy_cache", "*/boostai/boost/*" ]
 let g:ffind_path = '.'
 
 function! FFind(...)
@@ -20,7 +20,7 @@ function! FFind(...)
     endif
 
     if a:0==2
-      let l:string_pattern=a:2
+      let l:string_pattern=substitute(a:2, "^\\s\\+\\|\\s\\+$","", "g")
     endif
     
     if type(a:1)==type([])
